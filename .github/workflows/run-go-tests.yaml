@@ -1,0 +1,17 @@
+name: Test controller
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.17.9" # The Go version to download (if necessary) and use.
+      - name: Make test
+        run: |
+          make test
