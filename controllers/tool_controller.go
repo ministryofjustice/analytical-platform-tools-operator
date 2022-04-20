@@ -19,6 +19,7 @@ package controllers
 import (
 	"context"
 
+	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -39,7 +40,7 @@ type ToolReconciler struct {
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
-// TODO(user): Modify the Reconcile function to compare the state specified by
+// TODO(jasonBirchall): Modify the Reconcile function to compare the state specified by
 // the Tool object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
@@ -49,7 +50,15 @@ type ToolReconciler struct {
 func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	// TODO(user): your logic here
+	tool := &toolsv1alpha1.Tool{}
+	if err := r.Get(ctx, req.NamespacedName, tool); err != nil {
+		if errors.IsNotFound(err) {
+			log.Log.Info("tool resource not found")
+			return ctrl.Result{}, nil
+		}
+		log.Log.Error(err, "Failed to get Tool resource")
+		return ctrl.Result{}, nil
+	}
 
 	return ctrl.Result{}, nil
 }
