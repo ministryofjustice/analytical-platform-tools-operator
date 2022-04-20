@@ -3,8 +3,10 @@
 coverage/
 venv/
 env/
+bin/
 .DS_STORE
 .vscode
+*.out
 *.code-workspace
 *.sha256
 terraform.tfstate
