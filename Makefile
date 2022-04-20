@@ -47,7 +47,9 @@ ifeq ($(USE_IMAGE_DIGESTS), true)
 endif
 
 # Image URL to use all building/pushing image targets
-IMG ?= json0/analytical-platform-tools-operator
+# You must have a local kind cluster up and running
+# Run: make cluster-up
+IMG ?= localhost:5001/tools-operator:$(VERSION)
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.21
 
@@ -129,6 +131,14 @@ docker-push: ## Push docker image with the manager.
 ifndef ignore-not-found
   ignore-not-found = false
 endif
+
+.PHONY: cluster-up
+cluster-up:
+	./create-kind.sh
+
+.PHONY: cluster-down
+cluster-down:
+	kind delete cluster
 
 .PHONY: install
 install: manifests kustomize ## Install CRDs into the K8s cluster specified in ~/.kube/config.
