@@ -6,9 +6,10 @@ on:
 
 env:
   ECR_NAME: ${{ secrets.ECR_NAME }}
+  VERSION: ${{ github.sha }}
 
 jobs:
-  test:
+  test-build-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,6 +35,6 @@ jobs:
           secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
           region: eu-west-2
           local-image: local
-          image: ${ECR_NAME}:${{ github.sha }}
+          image: ${ECR_NAME}:${VERSION}
 
       # - name: Deploy to development cluster
