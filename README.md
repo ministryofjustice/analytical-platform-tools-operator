@@ -10,7 +10,7 @@
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/ministryofjustice/analytical-platform-tools-operator.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator)
 [![GitHub issues](https://img.shields.io/github/issues/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/issues/)
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
-[![tests](https://github.com/ministryofjustice/analytical-platform-tools-operator//workflows/run-go-tests.yaml/badge.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator/actions)
+[![tests](https://github.com/ministryofjustice/analytical-platform-tools-operator//workflows/run-go-tests/badge.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator/actions)
 
 ## Development
 
