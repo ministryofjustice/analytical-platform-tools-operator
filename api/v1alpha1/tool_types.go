@@ -27,18 +27,36 @@ type ToolSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Tool. Edit tool_types.go to remove/update
-	Name    string `json:"name,omitempty"`
-	Version string `json:"version,omitempty"`
-	User    string `json:"user,omitempty"`
+	// Name is the name of the tool to be deployed
+	Name string `json:"Name"`
+	// ImageVersion refers to the version of the pushed image
+	ImageVersion string `json:"Version,omitempty"`
+	// Username of the initialed user
+	Username string `json:"User"`
+	// IamRole assigned at initialisation
+	IamRole string `json:"Iamrole"`
+	// ProxyClientID is the client id of the auth proxy
+	ProxyClientID string `json:"ProxyClientID,omitempty"`
+	// ProxyClientSecret is the client secret of the auth proxy
+	ProxyClientSecret string `json:"ProxyClientSecret,omitempty"`
+	// ProxyDomain is the domain of the auth ProxyClientID
+	ProxyDomain string `json:"ProxyDomain,omitempty"`
+	// ProxyCookies is the cookies of the auth proxy
+	ProxyCookies string `json:"ProxyCookies,omitempty"`
+	// ProxyImageVersion is the version of the auth proxy
+	ProxyImageVersion string `json:"ProxyVersion,omitempty"`
 }
 
 // ToolStatus defines the observed state of Tool
 type ToolStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	DateLastUsed     string   `json:"DateLastUsed,omitempty"`
+	// DateLastUsed is the date the tool was last used by the user
+	DateLastUsed string `json:"DateLastUsed,omitempty"`
+	// PreviousVersions is a list of previous versions of the tool used by the user
 	PreviousVersions []string `json:"PreviousVersions,omitempty"`
+	// Url is the url of the tool
+	Url string `json:"Url,omitempty"`
 }
 
 //+kubebuilder:object:root=true

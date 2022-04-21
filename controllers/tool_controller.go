@@ -18,6 +18,7 @@ package controllers
 
 import (
 	"context"
+	"strings"
 
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -50,6 +51,7 @@ type ToolReconciler struct {
 func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
+	// Check the status of the tool
 	tool := &toolsv1alpha1.Tool{}
 	if err := r.Get(ctx, req.NamespacedName, tool); err != nil {
 		if errors.IsNotFound(err) {
@@ -59,6 +61,25 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		log.Log.Error(err, "Failed to get Tool resource")
 		return ctrl.Result{}, nil
 	}
+
+	// TODO: Add conditonal for tool to implement
+	if strings.ToLower(tool.Name) == strings.ToLower("JupyterLabDatascienceNotebook") {
+		log.Log.Info("Reconciling Jupyterlab")
+		j := &toolsv1alpha1.JupyterLab{}
+		if err := r.Get(ctx, req.NamespacedName, j); err != nil {
+			if errors.IsNotFound(err) {
+				log.Log.Info("Jupyterlab not found")
+				dep := r.deployJupyter()
+				if err := r.Create(ctx, dep); err != nil {
+					log.Log.Error(err, "Failed to create JupyterLab")
+					return ctrl.Result{}, err
+				}
+
+			}
+		}
+	}
+	// TODO: Deploy tool depending on conditional
+	// TODO: Update status of the tool
 
 	return ctrl.Result{}, nil
 }
