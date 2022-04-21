@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: charts.analytical-platform.justice
+  version: v1alpha1
+  kind: JupyterLabDatascienceNotebook
+  chart: helm-charts/jupyter-lab-datascience-notebook
+#+kubebuilder:scaffold:watch
