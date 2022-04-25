@@ -64,6 +64,7 @@ spec:
                 type: string
             required:
             - Iamrole
+            - Name
             - User
             type: object
           status:

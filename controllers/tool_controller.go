@@ -26,6 +26,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
+	J
+	jupyterlab "github.com/ministryofjustice/analytical-platform-tools-operator/controller/v1alpha1"
 	toolsv1alpha1 "github.com/ministryofjustice/analytical-platform-tools-operator/api/v1alpha1"
 )
 
@@ -65,7 +67,7 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 	// TODO: Add conditonal for tool to implement
 	if strings.ToLower(tool.Name) == strings.ToLower("JupyterLabDatascienceNotebook") {
 		log.Log.Info("Reconciling Jupyterlab")
-		j := &toolsv1alpha1.JupyterLab{}
+		j := &v1alpha1.JupyterLabDatascienceNotebook{}
 		if err := r.Get(ctx, req.NamespacedName, j); err != nil {
 			if errors.IsNotFound(err) {
 				log.Log.Info("Jupyterlab not found")
