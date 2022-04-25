@@ -28,8 +28,10 @@ type JupyterLabSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of JupyterLab. Edit jupyterlab_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Image is the image to use for the JupyterLab instance
+	Image string `json:"image"`
+	// Version is the image tag or version to use for the JupyterLab instance
+	Version string `json:"version"`
 }
 
 // JupyterLabStatus defines the observed state of JupyterLab

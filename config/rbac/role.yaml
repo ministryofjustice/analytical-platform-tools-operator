@@ -8,6 +8,32 @@ rules:
 - apiGroups:
   - tools.analytical-platform.justice
   resources:
+  - jupyterlabs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - jupyterlabs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - jupyterlabs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
   - tools
   verbs:
   - create
