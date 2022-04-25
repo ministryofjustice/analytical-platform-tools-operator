@@ -1,0 +1,6 @@
+apiVersion: tools.analytical-platform.justice/v1alpha1
+kind: JupyterLab
+metadata:
+  name: jupyterlab-sample
+spec:
+  # TODO(user): Add fields here
