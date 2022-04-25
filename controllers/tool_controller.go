@@ -65,21 +65,6 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 	}
 
 	// TODO: Add conditonal for tool to implement
-	if strings.ToLower(tool.Name) == strings.ToLower("JupyterLabDatascienceNotebook") {
-		log.Log.Info("Reconciling Jupyterlab")
-		j := &v1alpha1.JupyterLabDatascienceNotebook{}
-		if err := r.Get(ctx, req.NamespacedName, j); err != nil {
-			if errors.IsNotFound(err) {
-				log.Log.Info("Jupyterlab not found")
-				dep := r.deployJupyter()
-				if err := r.Create(ctx, dep); err != nil {
-					log.Log.Error(err, "Failed to create JupyterLab")
-					return ctrl.Result{}, err
-				}
-
-			}
-		}
-	}
 	// TODO: Deploy tool depending on conditional
 	// TODO: Update status of the tool
 
