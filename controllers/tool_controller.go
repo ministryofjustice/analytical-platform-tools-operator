@@ -21,6 +21,7 @@ import (
 	"strings"
 
 	"k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -63,24 +64,44 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		return ctrl.Result{}, nil
 	}
 
-	// TODO: Add conditonal for tool to implement
 	if tool.Name == strings.ToLower("jupyterlab") {
 		log.Log.Info("Reconciling JupyterLab")
-		jupyterlab := &toolsv1alpha1.JupyterLabs{}
+		jupyterlab := &toolsv1alpha1.JupyterLab{}
 		err := r.Get(ctx, types.NamespacedName{Name: tool.Name, Namespace: tool.Namespace}, jupyterlab)
 		if err != nil && errors.IsNotFound(err) {
-			err := r.Create(ctx, tool)
+			jupyterlabDeploy := r.createJupyterLabDeployment(tool)
+			err := r.Create(ctx, jupyterlabDeploy)
 			if err != nil {
 				log.Log.Error(err, "Failed to create JupyterLab resource")
 				return ctrl.Result{}, nil
 			}
+			return ctrl.Result{Requeue: true}, nil
 		}
 		return ctrl.Result{}, nil
 	}
-	// TODO: Deploy tool depending on conditional
 	// TODO: Update status of the tool
 
 	return ctrl.Result{}, nil
+}
+
+func (r *ToolReconciler) createJupyterLabDeployment(tool *toolsv1alpha1.Tool) *toolsv1alpha1.JupyterLab {
+	jupyterlab := &toolsv1alpha1.JupyterLab{
+		ObjectMeta: r.createObjectMeta(tool.Name, tool.Namespace),
+		Spec: toolsv1alpha1.JupyterLabSpec{
+			Image:   "jupyter/minimal-notebook",
+			Version: tool.Spec.ImageVersion,
+		},
+	}
+
+	ctrl.SetControllerReference(tool, jupyterlab, r.Scheme)
+	return jupyterlab
+}
+
+func (r *ToolReconciler) createObjectMeta(name, namespace string) metav1.ObjectMeta {
+	return metav1.ObjectMeta{
+		Name:      name,
+		Namespace: namespace,
+	}
 }
 
 // SetupWithManager sets up the controller with the Manager.
