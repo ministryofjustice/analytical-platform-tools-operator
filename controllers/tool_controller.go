@@ -18,9 +18,11 @@ package controllers
 
 import (
 	"context"
+	"strings"
 
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
@@ -62,6 +64,19 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 	}
 
 	// TODO: Add conditonal for tool to implement
+	if tool.Name == strings.ToLower("jupyterlab") {
+		log.Log.Info("Reconciling JupyterLab")
+		jupyterlab := &toolsv1alpha1.JupyterLabs{}
+		err := r.Get(ctx, types.NamespacedName{Name: tool.Name, Namespace: tool.Namespace}, jupyterlab)
+		if err != nil && errors.IsNotFound(err) {
+			err := r.Create(ctx, tool)
+			if err != nil {
+				log.Log.Error(err, "Failed to create JupyterLab resource")
+				return ctrl.Result{}, nil
+			}
+		}
+		return ctrl.Result{}, nil
+	}
 	// TODO: Deploy tool depending on conditional
 	// TODO: Update status of the tool
 
