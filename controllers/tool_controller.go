@@ -108,5 +108,6 @@ func (r *ToolReconciler) createObjectMeta(name, namespace string) metav1.ObjectM
 func (r *ToolReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&toolsv1alpha1.Tool{}).
+		Owns(&toolsv1alpha1.JupyterLab{}).
 		Complete(r)
 }
