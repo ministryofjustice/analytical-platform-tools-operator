@@ -38,6 +38,9 @@ spec:
               Iamrole:
                 description: IamRole assigned at initialisation
                 type: string
+              ImageVersion:
+                description: ImageVersion refers to the version of the pushed image
+                type: string
               Name:
                 description: Name is the name of the tool to be deployed
                 type: string
@@ -59,11 +62,8 @@ spec:
               User:
                 description: Username of the initialed user
                 type: string
-              Version:
-                description: ImageVersion refers to the version of the pushed image
-                type: string
             required:
-            - Iamrole
+            - ImageVersion
             - Name
             - User
             type: object

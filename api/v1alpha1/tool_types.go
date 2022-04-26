@@ -30,11 +30,11 @@ type ToolSpec struct {
 	// Name is the name of the tool to be deployed
 	Name string `json:"Name"`
 	// ImageVersion refers to the version of the pushed image
-	ImageVersion string `json:"Version,omitempty"`
+	ImageVersion string `json:"ImageVersion"`
 	// Username of the initialed user
 	Username string `json:"User"`
 	// IamRole assigned at initialisation
-	IamRole string `json:"Iamrole"`
+	IamRole string `json:"Iamrole,omitempty"`
 	// ProxyClientID is the client id of the auth proxy
 	ProxyClientID string `json:"ProxyClientID,omitempty"`
 	// ProxyClientSecret is the client secret of the auth proxy

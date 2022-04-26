@@ -5,4 +5,4 @@ metadata:
 spec:
   Name: JupyterLab
   User: jasonBirchall
-  Version: 1.1
+  ImageVersion: latest

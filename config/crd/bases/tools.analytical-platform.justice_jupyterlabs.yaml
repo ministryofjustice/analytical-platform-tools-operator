@@ -35,10 +35,15 @@ spec:
           spec:
             description: JupyterLabSpec defines the desired state of JupyterLab
             properties:
-              foo:
-                description: Foo is an example field of JupyterLab. Edit jupyterlab_types.go
-                  to remove/update
+              image:
+                description: Image is the image to use for the JupyterLab instance
                 type: string
+              version:
+                description: Version is the image tag or version to use for the JupyterLab
+                  instance
+                type: string
+            required:
+            - version
             type: object
           status:
             description: JupyterLabStatus defines the observed state of JupyterLab

@@ -3,4 +3,5 @@ kind: JupyterLab
 metadata:
   name: jupyterlab-sample
 spec:
-  # TODO(user): Add fields here
+  image: jupyter/minimal-notebook
+  version: python-3.9.10

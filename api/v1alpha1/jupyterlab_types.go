@@ -29,7 +29,7 @@ type JupyterLabSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Image is the image to use for the JupyterLab instance
-	Image string `json:"image"`
+	Image string `json:"image,omitempty"`
 	// Version is the image tag or version to use for the JupyterLab instance
 	Version string `json:"version"`
 }
