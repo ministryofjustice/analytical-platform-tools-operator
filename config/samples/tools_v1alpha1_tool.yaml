@@ -1,8 +1,8 @@
 apiVersion: tools.analytical-platform.justice/v1alpha1
 kind: Tool
 metadata:
-  name: tool-sample
+  name: jupyterlab
 spec:
-  Name: JupyterLab
-  User: jasonBirchall
-  ImageVersion: latest
+  user: jasonBirchall
+  image: jupyter/minimal-notebook
+  version: latest

@@ -18,6 +18,7 @@ package controllers
 
 import (
 	"context"
+	"strings"
 
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -42,13 +43,6 @@ type ToolReconciler struct {
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
-// TODO(jasonBirchall): Modify the Reconcile function to compare the state specified by
-// the Tool object against the actual cluster state, and then
-// perform operations to make the cluster state reflect the state specified by
-// the user.
-//
-// For more details, check Reconcile and its Result here:
-// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.11.0/pkg/reconcile
 func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
@@ -63,7 +57,7 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		return ctrl.Result{}, nil
 	}
 
-	if tool.Name == "JupyterLab" {
+	if strings.ToLower(tool.Name) == "jupyterlab" {
 		log.Log.Info("Reconciling JupyterLab")
 		jupyterlab := &toolsv1alpha1.JupyterLab{}
 		err := r.Get(ctx, types.NamespacedName{Name: tool.Name, Namespace: tool.Namespace}, jupyterlab)
@@ -85,22 +79,18 @@ func (r *ToolReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 
 func (r *ToolReconciler) createJupyterLabDeployment(tool *toolsv1alpha1.Tool) *toolsv1alpha1.JupyterLab {
 	jupyterlab := &toolsv1alpha1.JupyterLab{
-		ObjectMeta: r.createObjectMeta(tool.Name, tool.Namespace),
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      tool.Name,
+			Namespace: tool.Namespace,
+		},
 		Spec: toolsv1alpha1.JupyterLabSpec{
-			Image:   "jupyter/minimal-notebook",
+			Image:   tool.Spec.Image,
 			Version: tool.Spec.ImageVersion,
 		},
 	}
 
 	ctrl.SetControllerReference(tool, jupyterlab, r.Scheme)
 	return jupyterlab
-}
-
-func (r *ToolReconciler) createObjectMeta(name, namespace string) metav1.ObjectMeta {
-	return metav1.ObjectMeta{
-		Name:      name,
-		Namespace: namespace,
-	}
 }
 
 // SetupWithManager sets up the controller with the Manager.

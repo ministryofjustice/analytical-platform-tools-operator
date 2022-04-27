@@ -35,37 +35,21 @@ spec:
           spec:
             description: ToolSpec defines the desired state of Tool
             properties:
-              Iamrole:
+              iamrole:
                 description: IamRole assigned at initialisation
                 type: string
-              ImageVersion:
-                description: ImageVersion refers to the version of the pushed image
+              image:
+                description: Image defines the name of the container image to use
                 type: string
-              Name:
-                description: Name is the name of the tool to be deployed
-                type: string
-              ProxyClientID:
-                description: ProxyClientID is the client id of the auth proxy
-                type: string
-              ProxyClientSecret:
-                description: ProxyClientSecret is the client secret of the auth proxy
-                type: string
-              ProxyCookies:
-                description: ProxyCookies is the cookies of the auth proxy
-                type: string
-              ProxyDomain:
-                description: ProxyDomain is the domain of the auth ProxyClientID
-                type: string
-              ProxyVersion:
-                description: ProxyImageVersion is the version of the auth proxy
-                type: string
-              User:
+              user:
                 description: Username of the initialed user
                 type: string
+              version:
+                description: ImageVersion refers to the version of the pushed image
+                type: string
             required:
-            - ImageVersion
-            - Name
-            - User
+            - user
+            - version
             type: object
           status:
             description: ToolStatus defines the observed state of Tool

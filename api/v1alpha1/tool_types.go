@@ -27,16 +27,16 @@ type ToolSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Name is the name of the tool to be deployed
-	Name string `json:"Name"`
+	// Image defines the name of the container image to use
+	Image string `json:"image,omitempty"`
 	// ImageVersion refers to the version of the pushed image
-	ImageVersion string `json:"ImageVersion"`
+	ImageVersion string `json:"version"`
 	// Username of the initialed user
-	Username string `json:"User"`
+	Username string `json:"user"`
 	// IamRole assigned at initialisation
-	IamRole string `json:"Iamrole,omitempty"`
+	IamRole string `json:"iamrole,omitempty"`
 	// ProxyClientID is the client id of the auth proxy
-	ProxyClientID string `json:"ProxyClientID,omitempty"`
+	/* ProxyClientID string `json:"ProxyClientID,omitempty"`
 	// ProxyClientSecret is the client secret of the auth proxy
 	ProxyClientSecret string `json:"ProxyClientSecret,omitempty"`
 	// ProxyDomain is the domain of the auth ProxyClientID
@@ -44,7 +44,7 @@ type ToolSpec struct {
 	// ProxyCookies is the cookies of the auth proxy
 	ProxyCookies string `json:"ProxyCookies,omitempty"`
 	// ProxyImageVersion is the version of the auth proxy
-	ProxyImageVersion string `json:"ProxyVersion,omitempty"`
+	ProxyImageVersion string `json:"ProxyVersion,omitempty"` */
 }
 
 // ToolStatus defines the observed state of Tool
