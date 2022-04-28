@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
 env:
   IMAGE: ministryofjustice/analytical-platform-tools-operator
@@ -64,4 +64,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Add git commit hash to kustomize manifest
+          commit_message: build(dev):Add git commit hash to kustomize manifest
