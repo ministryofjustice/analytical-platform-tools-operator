@@ -5,6 +5,7 @@ name: Production Build, Test, Push and Deploy
 
 on:
   release:
+    types: [created]
 
 env:
   IMAGE: ministryofjustice/analytical-platform-tools-operator
