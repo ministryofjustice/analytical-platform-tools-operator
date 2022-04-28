@@ -1,8 +1,10 @@
-name: Non-production Build, Test, Push and Deploy
+# Deploys are performed by the kustomize controller on the Dev EKS infrustructure.
+# To successfully deploy, we need to have an image in an image registry and the kustomize
+# manifest pointing at the correct place.
+name: Production Build, Test, Push and Deploy
 
 on:
-  workflow_dispatch:
-  push:
+  release:
 
 env:
   IMAGE: ministryofjustice/analytical-platform-tools-operator
@@ -27,10 +29,8 @@ jobs:
       - name: Generate build ID
         id: prep
         run: |
-          branch=${GITHUB_REF##*/}
-          sha=${GITHUB_SHA::8}
-          ts=$(date +%s)
-          echo "::set-output name=BUILD_ID::${branch}-${sha}-${ts}"
+          branch=${GITHUB_REF}
+          echo "::set-output name=BUILD_ID::${branch}"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -52,11 +52,3 @@ jobs:
           file: ./Dockerfile
           tags: |
             ${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
-
-      - name: Amend kustomize manifest for dev deploy
-        run: |
-          cd config/manager && kustomize edit set image controller=${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
-
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Add git commit hash to kustomize manifest
