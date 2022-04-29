@@ -70,4 +70,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: build(dev):Add git commit hash to kustomize manifest
+          commit_message: build(dev):add git commit hash to kustomize manifest
