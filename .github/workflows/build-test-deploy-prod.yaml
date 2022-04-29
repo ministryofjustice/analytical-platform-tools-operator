@@ -5,6 +5,8 @@ name: Production Build, Test, Push and Deploy
 
 on:
   release:
+    # Dynamic releasetag tag is set based on the assumption this ci task only runs on release
+    types: [published]
 
 env:
   IMAGE: ministryofjustice/analytical-platform-tools-operator
