@@ -47,9 +47,11 @@ ifeq ($(USE_IMAGE_DIGESTS), true)
 endif
 
 # Image URL to use all building/pushing image targets
+IMG ?= ministryofjustice/analytical-platform-tools-operator:$(VERSION)
 # You must have a local kind cluster up and running
 # Run: make cluster-up
-IMG ?= ministryofjustice/analytical-platform-tools-operator:$(VERSION)
+LOCAl_IMG ?= localhost:5001/analytical-platform-tools-operator:$(VERSION)
+
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.21
 
@@ -122,9 +124,13 @@ run: manifests generate fmt vet ## Run a controller from your host.
 docker-build: test ## Build docker image with the manager.
 	docker build -t ${IMG} .
 
-.PHONY: docker-push
-docker-push: ## Push docker image with the manager.
-	docker push ${IMG}
+.PHONY: local-docker-build
+local-docker-build: test ## Build docker image for local testing.
+	docker build -t ${LOCAl_IMG} .
+
+.PHONY: local-docker-push
+local-docker-push: ## Push docker image to a local registry.
+	docker push ${LOCAl_IMG}
 
 ##@ Deployment
 
