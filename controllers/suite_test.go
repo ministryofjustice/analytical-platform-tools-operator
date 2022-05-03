@@ -97,7 +97,6 @@ var _ = BeforeSuite(func() {
 		err = k8sManager.Start(ctx)
 		Expect(err).ToNot(HaveOccurred(), "failed to run manager")
 	}()
-
 }, 60)
 
 var _ = AfterSuite(func() {
