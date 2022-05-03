@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -24,10 +23,6 @@ var _ = Describe("Tools controller", func() {
 	const (
 		ToolName      = "test-tool"
 		ToolNamespace = "default"
-
-		timeout  = time.Second * 10
-		duration = time.Second * 10
-		interval = time.Millisecond * 250
 	)
 
 	Context("create a tool", func() {
