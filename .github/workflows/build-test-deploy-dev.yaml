@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - "**.md"
       - ".github/**"
+      - "Makefile"
 
 env:
   IMAGE: ministryofjustice/analytical-platform-tools-operator
