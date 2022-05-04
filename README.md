@@ -7,8 +7,6 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/ministryofjustice/analytical-platform-tools-operator)](https://goreportcard.com/report/github.com/ministryofjustice/analytical-platform-tools-operator)
 [![GoDoc](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator?status.svg)](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator)
-[![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/ministryofjustice/analytical-platform-tools-operator.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator)
-[![GitHub issues](https://img.shields.io/github/issues/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/issues/)
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
 
 The "Tools" operator will enable the [control panel]() to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
