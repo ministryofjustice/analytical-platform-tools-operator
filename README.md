@@ -1,6 +1,6 @@
 <p align="center">
   <h2 align="center">Analytical Platform Tools Operator</h2>
-  <p align="center">The intention of this repository is to act as a placeholder for the Tools Operator.</p>
+  <p align="center">This repository contains the necessary code to deploy a "Tools" Kubernetes operator into the Analytical Platform ecosystem.</p>
 </p>
 
 ---
@@ -10,6 +10,14 @@
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/ministryofjustice/analytical-platform-tools-operator.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator)
 [![GitHub issues](https://img.shields.io/github/issues/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/issues/)
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
+
+The "Tools" operator will enable the [control panel]() to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
+
+- list all available versions of each tools
+
+- show what the current user has deployed
+
+- install/start/stop and delete a tool for the current user.
 
 ## Development practices
 
@@ -55,10 +63,50 @@ Finally deploy:
 make deploy
 ```
 
-## GitHub actions
+## Deployment
 
-The following actions run in this repository and perform the following:
+The deployment in this repository isn't ideal. At the time of its creation, the Analytical Platform only allows installs via [flux]() - this flux installation is also fairly flaky and required a bit of hacking to allow us control of the image it installs. This next section should clear up how deployment works.
 
-### Tests
+### Development cluster
 
-`make test` is run on each push to a branch.
+The development cluster is an EKS cluster in the dev AWS account. Deployment to this cluster should be restricted to anything in the main branch of this repository.
+
+#### GitHub Action
+
+A GitHub Acton named `build-test-build-dev` triggers on each push to main. The intention of this pipeline is to test (`make test`), build (`make docker-build`) and push to dockerhub (`make docker-push`) using a combination of <branch>-<gitSHA>-<timestamp> as the image tag. The pipeline will then deploy the controller to the Development cluster by amending the image tag in `config/manager`.
+
+The less than ideal part of this pipeline is we have to amend the kustomize manifest file as a step in the pipeline. This means the pipeline creates a commit and push to main to deploy.
+
+#### Manual
+
+##### Pre-reqs
+
+You must have push permissions to the `ministryofjustice` dockerhub repository.
+
+##### Build, push and deploy
+
+```bash
+make docker-build
+```
+
+```bash
+make docker-push
+```
+
+```bash
+make deploy
+```
+
+### Production cluster
+
+#### GitHub Action
+
+#### Manual
+
+## Test
+
+The code in this repository uses [envtest](https://book.kubebuilder.io/cronjob-tutorial/writing-tests.html) to perform go tests against mock ectd and api components. To run these tests:
+
+```bash
+make test
+```
