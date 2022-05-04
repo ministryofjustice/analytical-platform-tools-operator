@@ -6,7 +6,9 @@
 ---
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/ministryofjustice/analytical-platform-tools-operator)](https://goreportcard.com/report/github.com/ministryofjustice/analytical-platform-tools-operator)
+
 [![GoDoc](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator?status.svg)](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator)
+
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
 
 The "Tools" operator will enable the [control panel]() to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
@@ -21,7 +23,7 @@ The "Tools" operator will enable the [control panel]() to communicate with it us
 
 ### Commit messages
 
-Please if you can use [conventional commits](https://conventionalcommits.org/) to make your commits and follow the [conventional commit guidelines](https://conventionalcommits.org/en/v1.0.0/guidelines.html).
+Please if you can use [conventional commits](https://conventionalcommits.org/) to make your commits and follow the [conventional commit guidelines](https://www.conventionalcommits.org/en/v1.0.0/#specification).
 
 ### Versioning
 
@@ -31,7 +33,7 @@ Please use [semantic versioning](https://semver.org/) for versioning when releas
 
 ### Pre-reqs
 
-- you should install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+- install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 
 ### How to use
 
