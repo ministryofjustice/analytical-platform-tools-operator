@@ -10,11 +10,8 @@
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/ministryofjustice/analytical-platform-tools-operator.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator)
 [![GitHub issues](https://img.shields.io/github/issues/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/issues/)
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
-[![tests](https://github.com/ministryofjustice/analytical-platform-tools-operator//workflows/run-go-tests/badge.svg)](https://github.com/ministryofjustice/analytical-platform-tools-operator/actions)
 
-## Development
-
-There are a few nuances I'd like this repository to have.
+## Development practices
 
 ### Commit messages
 
@@ -24,9 +21,39 @@ Please if you can use [conventional commits](https://conventionalcommits.org/) t
 
 Please use [semantic versioning](https://semver.org/) for versioning when releasing. This will make it easier to track changes and to make it easier to find the latest version.
 
-### Local development
+## Local development
 
-TBD
+### Pre-reqs
+
+- you should install [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+
+### How to use
+
+Using a local Kubernetes cluster, you should be able to deploy and perform actions locally that should emulate the dev and production clusters.
+
+To spin up a local cluster with a local container registry run the following in the root of the repository:
+
+```bash
+make cluster up
+```
+
+When you're ready you can build and tag for local push:
+
+```bash
+make local-docker-build
+```
+
+And then push to the local image registry hosted in the kind cluster:
+
+```bash
+make local-docker-push
+```
+
+Finally deploy:
+
+```bash
+make deploy
+```
 
 ## GitHub actions
 
