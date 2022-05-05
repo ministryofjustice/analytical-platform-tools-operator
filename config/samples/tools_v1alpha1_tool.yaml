@@ -6,3 +6,15 @@ spec:
   user: jasonBirchall
   image: jupyter/minimal-notebook
   version: latest
+---
+apiVersion: tools.analytical-platform.justice/v1alpha1
+kind: Tool
+metadata:
+  name: rstudio
+spec:
+---
+apiVersion: tools.analytical-platform.justice/v1alpha1
+kind: Tool
+metadata:
+  name: airflow
+spec:
