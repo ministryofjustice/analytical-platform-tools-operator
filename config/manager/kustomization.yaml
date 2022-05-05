@@ -13,4 +13,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: ministryofjustice/analytical-platform-tools-operator
-  newTag: main-560dc0eb-1651757839
+  newTag: main-98e68d06-1651770440
