@@ -2,4 +2,5 @@
 resources:
 - tools_v1alpha1_tool.yaml
 - tools_v1alpha1_jupyterlab.yaml
+- tools_v1alpha1_rstudio.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples

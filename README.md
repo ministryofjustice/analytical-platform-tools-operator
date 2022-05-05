@@ -45,23 +45,13 @@ To spin up a local cluster with a local container registry run the following in 
 make cluster up
 ```
 
-When you're ready you can build and tag for local push:
+To run the controller outside the cluster, run:
 
 ```bash
-make local-docker-build
+make install run
 ```
 
-And then push to the local image registry hosted in the kind cluster:
-
-```bash
-make local-docker-push
-```
-
-Finally deploy:
-
-```bash
-make deploy
-```
+In another window you can create a sample resource from here: `./config/samples/.`
 
 ## Deployment
 

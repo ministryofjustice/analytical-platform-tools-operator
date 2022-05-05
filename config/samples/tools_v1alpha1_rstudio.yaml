@@ -1,0 +1,7 @@
+apiVersion: tools.analytical-platform.justice/v1alpha1
+kind: Rstudio
+metadata:
+  name: rstudio-sample
+spec:
+  image: rocker/rstudio
+  version: latest

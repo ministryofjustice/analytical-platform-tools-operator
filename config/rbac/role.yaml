@@ -102,6 +102,32 @@ rules:
 - apiGroups:
   - tools.analytical-platform.justice
   resources:
+  - rstudios
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - rstudios/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - rstudios/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
   - tools
   verbs:
   - create
