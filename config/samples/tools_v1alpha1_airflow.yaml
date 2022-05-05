@@ -1,0 +1,7 @@
+apiVersion: tools.analytical-platform.justice/v1alpha1
+kind: Airflow
+metadata:
+  name: airflow-sample
+spec:
+  image: apache/airflow
+  version: latest

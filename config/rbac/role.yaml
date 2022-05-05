@@ -76,6 +76,32 @@ rules:
 - apiGroups:
   - tools.analytical-platform.justice
   resources:
+  - airflows
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - airflows/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
+  - airflows/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - tools.analytical-platform.justice
+  resources:
   - jupyterlabs
   verbs:
   - create
