@@ -11,13 +11,32 @@
 
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
 
-The "Tools" operator will enable the [control panel]() to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
+The "Tools" operator will enable the [control panel](https://github.com/ministryofjustice/analytics-platform-control-panel/tree/main/controlpanel) to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
 
 - list all available versions of each tools
 
+TODO: Add global tool command - perhaps another api
+
 - show what the current user has deployed
 
+For example, After a tool is deployed it can be listing user be queried using the kubectl command:
+
+```bash
+> kubectl get tool -n user-namespace
+
+NAME         AGE
+airflow      17h
+jupyterlab   17h
+rstudio      17h
+```
+
 - install/start/stop and delete a tool for the current user.
+
+A tool can be deployed, deleted by crafting a manifest file and sending it to the api:
+
+```bash
+kubectl apply -f ./config/samples/tools_v1alpha1_jupyterlab.yaml
+```
 
 ## Development practices
 
@@ -55,7 +74,7 @@ In another window you can create a sample resource from here: `./config/samples/
 
 ## Deployment
 
-The deployment in this repository isn't ideal. At the time of its creation, the Analytical Platform only allows installs via [flux]() - this flux installation is also fairly flaky and required a bit of hacking to allow us control of the image it installs. This next section should clear up how deployment works.
+The deployment in this repository isn't ideal. At the time of its creation, the Analytical Platform only allows installs via [flux](https://github.com/moj-analytical-services/analytical-platform-flux/tree/main/clusters/development/apps/tools-operator) - this flux installation is also fairly flaky and required a bit of hacking to allow us control of the image it installs. This next section should clear up how deployment works.
 
 ### Development cluster
 
@@ -63,7 +82,7 @@ The development cluster is an EKS cluster in the dev AWS account. Deployment to 
 
 #### GitHub Action
 
-A GitHub Acton named `build-test-build-dev` triggers on each push to main. The intention of this pipeline is to test (`make test`), build (`make docker-build`) and push to dockerhub (`make docker-push`) using a combination of <branch>-<gitSHA>-<timestamp> as the image tag. The pipeline will then deploy the controller to the Development cluster by amending the image tag in `config/manager`.
+A GitHub Acton named `build-test-build-dev` triggers on each push to main. The intention of this pipeline is to test (`make test`), build (`make docker-build`) and push to dockerhub (`make docker-push`) using a combination of `branch`-`gitSHA`-`timestamp` as the image tag. The pipeline will then deploy the controller to the Development cluster by amending the image tag in `config/manager`.
 
 The less than ideal part of this pipeline is we have to amend the kustomize manifest file as a step in the pipeline. This means the pipeline creates a commit and push to main to deploy.
 
