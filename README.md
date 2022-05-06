@@ -9,7 +9,7 @@
 [![GoDoc](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator?status.svg)](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator)
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
 
-The "Tools" operator will enable the [control panel](https://github.com/ministryofjustice/analytics-platform-control-panel/tree/main/controlpanel) to communicate with it using standard REST API calls. It's function will be to list, create and delete tools required by the MoJ Data Analysts, and at the time of writing this README were limited to:
+The "Tools" operator will enable the [control panel](https://github.com/ministryofjustice/analytics-platform-control-panel/tree/main/controlpanel) to communicate with it using standard REST API calls. It's function will be to list, create and delete tools required by the MoJ Data Analysts. The tools at the time of writing this were limited to:
 
 - [JupyterLab](https://jupyter.org/)
 
@@ -17,7 +17,7 @@ The "Tools" operator will enable the [control panel](https://github.com/ministry
 
 - [Rstudio](https://www.rstudio.com/)
 
-A Kubernetes operator allows thethe control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
+A Kubernetes operator allows the control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
 
 - Show what the current user has deployed
 
