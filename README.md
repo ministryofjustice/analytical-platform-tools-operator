@@ -17,11 +17,9 @@ The "Tools" operator will enable the [control panel](https://github.com/ministry
 
 - [Rstudio](https://www.rstudio.com/)
 
-A Kubernetes operator allows the control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
+Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
 
-- Show what the current user has deployed
-
-  For example, After a tool is deployed it can be listing user be queried using the kubectl command:
+- Show what the current user has deployed in their namespace:
 
   ```bash
   > kubectl get tool -n user-namespace
@@ -33,8 +31,6 @@ A Kubernetes operator allows the control panel to make calls to the API on behal
   ```
 
 - Install/start/stop and delete a tool for the current user.
-
-  A tool can be deployed, deleted by crafting a manifest file and sending it to the api:
 
   ```bash
   > kubectl apply -f ./config/samples/tools_v1alpha1_jupyterlab.yaml
@@ -56,6 +52,8 @@ A Kubernetes operator allows the control panel to make calls to the API on behal
 - List all available versions of each tools
 
   TODO: Add global tool command - perhaps another api
+
+This operator is a small step towards easing development of features and further tooling.
 
 ## Development practices
 
@@ -130,3 +128,15 @@ The code in this repository uses [envtest](https://book.kubebuilder.io/cronjob-t
 ```bash
 make test
 ```
+
+## How do I add another API
+
+This operator was bootstrapped using the [operator-sdk](https://sdk.operatorframework.io/docs/overview/) binary. To add another API, controller and custom resource:
+
+```bash
+> brew install operator-sdk
+> operator-sdk create api --group tools --version v1alpha1 --kind NEW_RESOURCE_NAME --resource --controller
+> make generate manifests
+```
+
+A decent tutorial can be found [here](https://sdk.operatorframework.io/docs/building-operators/golang/tutorial/)
