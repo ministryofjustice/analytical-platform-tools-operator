@@ -113,7 +113,7 @@ You must have push permissions to the `ministryofjustice` dockerhub repository.
 
 ###### Build, push and deploy
 
-This will test and build locally, pushing the the [ministryofjustice/analytical-platform-tools-operator]() dockerhub repository.
+This will test and build locally, pushing the [ministryofjustice/analytical-platform-tools-operator](https://hub.docker.com/r/ministryofjustice/analytical-platform-tools-operator) dockerhub repository.
 
 ```bash
 make docker-build docker-push deploy
