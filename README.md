@@ -6,37 +6,55 @@
 ---
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/ministryofjustice/analytical-platform-tools-operator)](https://goreportcard.com/report/github.com/ministryofjustice/analytical-platform-tools-operator)
-
 [![GoDoc](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator?status.svg)](https://godoc.org/github.com/ministryofjustice/analytical-platform-tools-operator)
-
 [![GitHub release](https://img.shields.io/github/release/ministryofjustice/analytical-platform-tools-operator.svg)](https://GitHub.com/ministryofjustice/analytical-platform-tools-operator/releases/)
 
-The "Tools" operator will enable the [control panel](https://github.com/ministryofjustice/analytics-platform-control-panel/tree/main/controlpanel) to communicate with it using standard REST API calls, providing an endpoint for Analytical Platform tools (such as JupyterLab, RStudio and Airflow) to do the following:
+The "Tools" operator will enable the [control panel](https://github.com/ministryofjustice/analytics-platform-control-panel/tree/main/controlpanel) to communicate with it using standard REST API calls. It's function will be to list, create and delete tools required by the MoJ Data Analysts, and at the time of writing this README were limited to:
 
-- list all available versions of each tools
+- [JupyterLab](https://jupyter.org/)
 
-TODO: Add global tool command - perhaps another api
+- [Airflow](https://airflow.apache.org/)
 
-- show what the current user has deployed
+- [Rstudio](https://www.rstudio.com/)
 
-For example, After a tool is deployed it can be listing user be queried using the kubectl command:
+Using a Kubernetes operator we can allow the control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
 
-```bash
-> kubectl get tool -n user-namespace
+- Show what the current user has deployed
 
-NAME         AGE
-airflow      17h
-jupyterlab   17h
-rstudio      17h
-```
+  For example, After a tool is deployed it can be listing user be queried using the kubectl command:
 
-- install/start/stop and delete a tool for the current user.
+  ```bash
+  > kubectl get tool -n user-namespace
 
-A tool can be deployed, deleted by crafting a manifest file and sending it to the api:
+  NAME         AGE
+  airflow      17h
+  jupyterlab   17h
+  rstudio      17h
+  ```
 
-```bash
-kubectl apply -f ./config/samples/tools_v1alpha1_jupyterlab.yaml
-```
+- Install/start/stop and delete a tool for the current user.
+
+  A tool can be deployed, deleted by crafting a manifest file and sending it to the api:
+
+  ```bash
+  > kubectl apply -f ./config/samples/tools_v1alpha1_jupyterlab.yaml
+  ```
+
+  An example of a manifest used to create JupyterLab would be:
+
+  ```bash
+  apiVersion: tools.analytical-platform.justice/v1alpha1
+  kind: JupyterLab
+  metadata:
+  name: jupyterlab-sample
+  spec:
+  image: jupyter/minimal-notebook
+  version: python-3.9.10
+  ```
+
+- List all available versions of each tools
+
+  TODO: Add global tool command - perhaps another api
 
 ## Development practices
 
