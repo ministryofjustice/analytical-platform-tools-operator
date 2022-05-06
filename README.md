@@ -17,7 +17,7 @@ The "Tools" operator will enable the [control panel](https://github.com/ministry
 
 - [Rstudio](https://www.rstudio.com/)
 
-Using a Kubernetes operator we can allow the control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
+A Kubernetes operator allows thethe control panel to make calls to the API on behalf of the user. Using a [Kubernetes client](https://kubernetes.io/docs/reference/using-api/client-libraries/) we can do things like:
 
 - Show what the current user has deployed
 
