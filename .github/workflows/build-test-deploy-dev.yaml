@@ -24,7 +24,7 @@ jobs:
           ref: main
           fetch-depth: 0 # To get all tags
 
-      - uses: WillAbides/setup-go-faster@v1.7.0
+      - uses: WillAbides/setup-go-faster@v1.8.0
         with:
           go-version: "1.17.x"
 
